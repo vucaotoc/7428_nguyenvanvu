@@ -47,12 +47,12 @@ st.markdown("""
 # HTML + Streamlit input fields
 st.markdown('<div class="login-container">', unsafe_allow_html=True)
 st.markdown('<h2>🔐 Login</h2>', unsafe_allow_html=True)
-
+st.markdown('<a href="#" >xin chào</a>',, unsafe_allow_html=True)
 # Inputs từ Streamlit
 username = st.text_input("", placeholder="Username")
 password = st.text_input("", type="password", placeholder="Password")
 login = st.button("Login")
-st.markdown('<a href="#" >xin chào</a>')
+
 # Logic xác thực
 if login:
     if username == "admin" and password == "1234":
