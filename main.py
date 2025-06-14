@@ -1,50 +1,23 @@
 import streamlit as st
-import requests
 
-# --- Cấu hình trang ---
-st.set_page_config(page_title="🌍 Country Flags", layout="wide")
+st.set_page_config(page_title="Login", layout="centered")
 
-st.title("🌍 World Flags Gallery")
+# Giao diện login
+st.title("🔐 Đăng nhập để xem cờ quốc gia")
 
-# --- Tải dữ liệu từ REST Countries API ---
-@st.cache_data
-def load_country_data():
-    url = "https://restcountries.com/v3.1/all"
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()
+with st.form("login_form", clear_on_submit=False):
+    username = st.text_input("Tên đăng nhập")
+    password = st.text_input("Mật khẩu", type="password")
+    submit_btn = st.form_submit_button("Đăng nhập")
+
+# Xử lý đăng nhập
+if submit_btn:
+    if username == "admin" and password == "1234":
+        st.session_state["authenticated"] = True
+        st.success("Đăng nhập thành công! 👉 Chuyển sang tab Flags")
     else:
-        st.error("❌ Không tải được dữ liệu quốc gia")
-        return []
+        st.error("Tên đăng nhập hoặc mật khẩu không đúng.")
 
-# --- Lấy dữ liệu ---
-countries = load_country_data()
-
-# --- Tìm kiếm ---
-search = st.text_input("🔍 Tìm kiếm quốc gia...", "").lower()
-
-# --- Hiển thị cờ các nước ---
-cols = st.columns(3)
-count = 0
-for country in sorted(countries, key=lambda c: c["name"]["common"]):
-    name = country["name"]["common"]
-    iso = country["cca2"]
-    flag_url = country["flags"]["png"]
-    region = country.get("region", "Unknown")
-
-    if search in name.lower():
-        with cols[count % 3]:
-            st.image(flag_url, width=150, caption=name)
-            st.markdown(f"**ISO:** `{iso}`")
-            st.markdown(f"**Region:** {region}")
-        count += 1
-
-if count == 0:
-    st.info("Không tìm thấy quốc gia nào.")
-
-
-
-
-
-
-
+# Nếu đã đăng nhập, hiển thị thông báo
+if st.session_state.get("authenticated", False):
+    st.info("✅ Bạn đã đăng nhập. Chuyển sang menu **Flags** để xem cờ.")
