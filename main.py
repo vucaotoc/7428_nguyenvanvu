@@ -1,23 +1,65 @@
 import streamlit as st
 
-st.set_page_config(page_title="Login", layout="centered")
+# Cấu hình page
+st.set_page_config(page_title="Login Page", layout="centered")
 
-# Giao diện login
-st.title("🔐 Đăng nhập để xem cờ quốc gia")
+# CSS
+st.markdown("""
+    <style>
+    .login-container {
+        background-color: #f9f9f9;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        width: 350px;
+        margin: auto;
+        margin-top: 100px;
+        text-align: center;
+    }
+    .login-container h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0 16px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+    }
+    .login-container button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        width: 100%;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .login-container button:hover {
+        background-color: #45a049;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
-with st.form("login_form", clear_on_submit=False):
-    username = st.text_input("Tên đăng nhập")
-    password = st.text_input("Mật khẩu", type="password")
-    submit_btn = st.form_submit_button("Đăng nhập")
+# HTML + Streamlit input fields
+st.markdown('<div class="login-container">', unsafe_allow_html=True)
+st.markdown('<h2>🔐 Login</h2>', unsafe_allow_html=True)
 
-# Xử lý đăng nhập
-if submit_btn:
+# Inputs từ Streamlit
+username = st.text_input("", placeholder="Username")
+password = st.text_input("", type="password", placeholder="Password")
+login = st.button("Login")
+<a href="#" >xin chào</a>
+# Logic xác thực
+if login:
     if username == "admin" and password == "1234":
+        st.success("✅ Đăng nhập thành công!")
+        st.balloons()
         st.session_state["authenticated"] = True
-        st.success("Đăng nhập thành công! 👉 Chuyển sang tab Flags")
     else:
-        st.error("Tên đăng nhập hoặc mật khẩu không đúng.")
+        st.error("❌ Sai tên đăng nhập hoặc mật khẩu.")
 
-# Nếu đã đăng nhập, hiển thị thông báo
-if st.session_state.get("authenticated", False):
-    st.info("✅ Bạn đã đăng nhập. Chuyển sang menu **Flags** để xem cờ.")
+st.markdown("</div>", unsafe_allow_html=True)
