@@ -52,7 +52,7 @@ st.markdown('<h2>🔐 Login</h2>', unsafe_allow_html=True)
 username = st.text_input("", placeholder="Username")
 password = st.text_input("", type="password", placeholder="Password")
 login = st.button("Login")
-<a href="#" >xin chào</a>
+st.markdown('<a href="#" >xin chào</a>')
 # Logic xác thực
 if login:
     if username == "admin" and password == "1234":
