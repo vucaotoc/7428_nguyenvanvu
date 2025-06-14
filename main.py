@@ -48,7 +48,7 @@ st.markdown("""
 st.markdown('<div class="login-container">', unsafe_allow_html=True)
 st.markdown('<h2>🔐 Login</h2>', unsafe_allow_html=True)
 st.markdown('<a href="#" >xin chào</a>', unsafe_allow_html=True)
-st.markdown('<img src="https://api.vietqr.io/image/970416-LOCPHAT000329929-yyJhr6n.jpg?accountName=NGUYEN%20VAN%20VU&amount=&addInfo=" />', unsafe_allow_html=True)
+st.markdown('<img src="https://api.vietqr.io/image/970416-LOCPHAT000329929-yyJhr6n.jpg?accountName=NGUYEN%20VAN%20VU&amount=65000&addInfo=123456" />', unsafe_allow_html=True)
 # Inputs từ Streamlit
 username = st.text_input("", placeholder="Username")
 password = st.text_input("", type="password", placeholder="Password")
